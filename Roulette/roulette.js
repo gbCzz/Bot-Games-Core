@@ -3,10 +3,10 @@
 let game_data = {};
 
 function start(group_id, breech, bullets) {
-	if (typeof breech != 'number' || typeof bullets != 'number')
+	if (typeof breech != 'number' || typeof bullets != 'number' || breech * bullets == 0)
 		return {
 			status: -2,
-			msg: '参数类型错误',
+			msg: '参数错误',
 		};
 	if (game_data?.[group_id]?.breech == undefined || game_data?.[group_id]?.breech == 0) {
 		game_data[group_id].breech = breech;
@@ -57,3 +57,7 @@ function shoot(group_id) {
 	}
 }
 
+module.exports = {
+	start,
+	shoot,
+};
