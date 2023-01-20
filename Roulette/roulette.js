@@ -66,7 +66,7 @@ function shoot(group_id) {
 				msg: `射出一枚子弹，剩余 ${game_data[group_id].bullets} 枚，分布在 ${game_data[group_id].breech} 个后膛中`,
 			};
 		} else {
-			delete game_data.group_id;
+			delete game_data[group_id];
 			return {
 				status: 0,
 				bullet_left: game_data[group_id].bullets,
@@ -85,8 +85,17 @@ function shoot(group_id) {
 	}
 }
 
+/**
+ * 强制结束指定群聊的轮盘赌
+ * @param {number | string} group_id 群号或其他能够唯一确定群聊的标识符
+ */
+function stop(group_id) {
+	if (game_data[group_id] != undefined) delete game_data[group_id];
+}
+
 module.exports = {
 	start,
 	shoot,
+	stop,
 };
 
