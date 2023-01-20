@@ -9,8 +9,15 @@ function start(group_id, breech, bullets) {
 			msg: '参数错误',
 		};
 	if (game_data?.[group_id]?.breech == undefined || game_data?.[group_id]?.breech == 0) {
+		game_data[group_id] = {};
 		game_data[group_id].breech = breech;
 		game_data[group_id].bullets = bullets;
+		return {
+			status: 0,
+			bullet_left: game_data[group_id].bullets,
+			breech_left: game_data[group_id].breech,
+			msg: `游戏开始，剩余 ${game_data[group_id].bullets} 枚，分布在 ${game_data[group_id].breech} 个后膛中`,
+		}
 	} else
 		return {
 			status: -1,
